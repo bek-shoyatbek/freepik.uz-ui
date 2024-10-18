@@ -25,6 +25,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="app">
+      <Analytics />
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -58,7 +59,6 @@ const App: React.FC = () => {
           />
         </Routes>
       </div>
-      <Analytics />
     </Router>
   );
 };
