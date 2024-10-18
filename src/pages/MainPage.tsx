@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './MainPage.css';
-
+import SEO from '../components/seo';
 const MainPage: React.FC = () => {
   const [link, setLink] = useState('');
 
@@ -11,6 +11,7 @@ const MainPage: React.FC = () => {
 
   return (
     <div className="main-page">
+      <SEO title="Freepik Content Downloader" description="Download Freepik content with ease" />
       <h1>Freepik Content Downloader</h1>
       <div className="input-container">
         <input

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthPages.css';
+import SEO from '../../components/seo';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -21,8 +22,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     navigate('/');
   };
 
-  return (
+  return (  
     <div className="auth-page">
+      <SEO title="Log In" description="Log in to your account" />
       <h1>Log In</h1>
       <form onSubmit={handleLogin}>
         <input

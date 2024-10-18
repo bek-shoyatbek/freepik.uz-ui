@@ -1,5 +1,7 @@
 import React from 'react';
 import './ProfilePage.css';
+import SEO from '../components/seo';
+
 
 interface Subscription {
   id: number;
@@ -22,6 +24,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile-page">
+      <SEO title="User Profile" description="View your user profile and subscriptions" />
       <h1>User Profile</h1>
       <div className="user-info">
         <p><strong>Name:</strong> {user.name}</p>

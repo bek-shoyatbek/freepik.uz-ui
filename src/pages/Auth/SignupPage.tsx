@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthPages.css';
+import SEO from '../../components/seo';
 
 interface SignupPageProps {
   onSignup: () => void;
@@ -24,6 +25,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
 
   return (
     <div className="auth-page">
+      <SEO title="Sign Up" description="Sign up for an account" />
       <h1>Sign Up</h1>
       <form onSubmit={handleSignup}>
         <input

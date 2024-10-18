@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import ProfilePage from './pages/ProfilePage';
-import SignupPage from './pages/Auth/SignupPage';
-import LoginPage from './pages/Auth/LoginPage';
 import './App.css';
 import { Analytics } from '@vercel/analytics/react';
+import SEO from './components/seo';
+import { HelmetProvider } from 'react-helmet-async';
+
+const LazyMainPage = React.lazy(() => import('./pages/MainPage'));
+const LazyProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+const LazySignupPage = React.lazy(() => import('./pages/Auth/SignupPage'));
+const LazyLoginPage = React.lazy(() => import('./pages/Auth/LoginPage'));
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,8 +27,10 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      <HelmetProvider>
       <div className="app">
-      <Analytics />
+        <SEO title="Freepik Content Downloader" description="Download Freepik content with ease" />
+        <Analytics />
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -43,22 +48,25 @@ const App: React.FC = () => {
           </ul>
         </nav>
 
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route 
-            path="/profile" 
-            element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/signup" 
-            element={<SignupPage onSignup={handleSignup} />} 
-          />
-          <Route 
-            path="/login" 
-            element={<LoginPage onLogin={handleLogin} />} 
-          />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<LazyMainPage />} />
+            <Route 
+              path="/profile" 
+              element={isAuthenticated ? <LazyProfilePage /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/signup" 
+              element={<LazySignupPage onSignup={handleSignup} />} 
+            />
+            <Route 
+              path="/login" 
+              element={<LazyLoginPage onLogin={handleLogin} />} 
+            />
+          </Routes>
+        </Suspense>
       </div>
+      </HelmetProvider>
     </Router>
   );
 };
