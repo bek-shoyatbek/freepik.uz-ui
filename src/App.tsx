@@ -5,6 +5,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignupPage from './pages/Auth/SignupPage';
 import LoginPage from './pages/Auth/LoginPage';
 import './App.css';
+import { Analytics } from '@vercel/analytics/react';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -57,6 +58,7 @@ const App: React.FC = () => {
           />
         </Routes>
       </div>
+      <Analytics />
     </Router>
   );
 };
